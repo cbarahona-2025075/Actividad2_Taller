@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#0A0A0F,#1A1A2E,#7B61FF);
+            padding: 20px;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .tarjeta {
+            display: block;
+            background: #FFFFFF;
+            text-align: center;
+            border-radius: 24px;
+            padding: 35px 30px;
+        }
+
+        .tabla {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .acciones {
+             display: flex;
+             flex-direction: row;
+             gap: 10px;
+         }
+
+        .titulo {
+            font-size: 30px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        .boton {
+            display: block;
+            width: auto;
+            padding: 14px 14px;
+            border-radius: 14px;
+            background: linear-gradient(135deg,#4F3BCC, #7B61FF);
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+        }
+
+        .regresar{
+            display: block;
+            width: auto;
+            padding: 14px 14px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+        }
+
+        table {
+             width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        th, td {
+            padding: 10px 16px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        td:last-child {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        thead {
+            background: #7B61FF;
+            color: white;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333333;
+            font-weight:20;
+        }
+
+        input {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #cccccc;
+            font-size: 14px;
+            width: 32%;
+            outline: none;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="tarjeta">
+            <h1 class="titulo">Lista de Usuarios</h1>
+            <p class="subtitulo">¿Qué deseas realizar con Usuarios?</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Nombre Usuario</th>
+                        <th>Apellido Usuario</th>
+                        <th>Edad Usuario</th>
+                        <th>Correo Usuario</th>
+                        <th>Rol Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="usuario: ${usuarios}">
+                        <td th:text="${usuario.idUsuario}"></td>
+                        <td th:text="${usuario.nombreUsuario}"></td>
+                        <td th:text="${usuario.apellidoUsuario}"></td>
+                        <td th:text="${usuario.edadUsuario}"></td>
+                        <td th:text="${usuario.correoUsuario}"></td>
+                        <td th:text="${usuario.rolUsuario}"></td>
+                        <td>
+                            <a class="boton" th:href="@{/usuarios/editar/{id}(id=${usuario.idUsuario})} ">Editar</a>
+                            <br>
+                            <a class="boton" th:href="@{/usuarios/eliminar/{id}(id=${usuario.idUsuario})}">Eliminar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            <div class="tabla">
+                <div class="acciones">
+                    <a th:href="@{/usuarios/nuevo}" class="boton">Agregar Usuario</a>
+                    <a class="regresar" th:href="@{/home}"> Regresar a Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

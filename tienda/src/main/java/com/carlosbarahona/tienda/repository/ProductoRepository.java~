@@ -1,0 +1,4 @@
+package com.carlosbarahona.tienda.repository;
+
+public interface ProductoRepository {
+}

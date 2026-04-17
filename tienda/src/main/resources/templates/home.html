@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg,#0A0A0F,#1A1A2E,#7B61FF);
+            padding: 20px;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            padding: 35px 30px;
+            text-align: center;
+            animation: aparecer 0.6s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .titulo {
+            font-size: 30px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 25px;
+        }
+
+        .usuario {
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .boton {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            background: linear-gradient(135deg,#4F3BCC, #7B61FF);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 24px rgba(37, 99, 235, 0.35);
+        }
+
+        .logout {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.25);
+        }
+
+        .logout:hover {
+            box-shadow: 0 14px 24px rgba(220, 38, 38, 0.35);
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .logout-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 480px) {
+            .tarjeta {
+                padding: 28px 22px;
+            }
+
+            .titulo {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="tarjeta">
+            <h1 class="titulo">Bienvenido</h1>
+            <p class="subtitulo">
+                Hola, <span class="usuario" th:text="${nombreUsuario}"></span>
+                <span class="usuario" th:text="${apellidoUsuario}"></span>
+            </p>
+
+            <p>Haz iniciado sesión correctamente</p>
+
+            <div class="acciones">
+                <a class="boton" th:href="@{/usuarios}"> Ir a Usuario</a>
+                <a class="boton" th:href="@{/categoria}"> Ir a Categoria</a>
+                <a class="boton" th:href="@{/detalle}"> Ir a Detalle Pedido</a>
+                <a class="boton" th:href="@{/pedido}">Ir a Pedido</a>
+                <a class="boton" th:href="@{/producto}">Ir a Producto</a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="logout-btn">
+                        Cerrar Sesion
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

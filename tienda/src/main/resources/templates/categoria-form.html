@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Categoria' : 'Nueva Categoria'"></title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg,#0A0A0F,#1A1A2E,#7B61FF);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+
+    .tarjeta{
+        display: block;
+        background: #FFFFFF;
+        text-align: center;
+        border-radius: 24px;
+        padding: 35px 30px;
+    }
+
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .campo {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      resize: vertical;
+  }
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    .acciones {
+        margin-top: 15px;
+    }
+
+    .btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 140px;
+        padding: 10px 15px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn-guardar {
+        background: linear-gradient(135deg,#4F3BCC, #7B61FF);
+        color: white;
+    }
+
+    .btn-volver {
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+        color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="tarjeta">
+    <h1 th:text="${modoEdicion} ? 'Editar Categoria' : 'Nueva Categoria'"></h1>
+
+    <form th:action="${modoEdicion} ? @{/categoria/actualizar/{id}(id=${categoria.idCategoria})} : @{/categoria/guardar}"
+          th:object="${categoria}"
+          method="post">
+
+      <div class="campo">
+        <label for="nombreCategoria">Nombre Categoria</label>
+        <input type="text" id="nombreCategoria" th:field="*{nombreCategoria}">
+        <div class="error"
+             th:if="${#fields.hasErrors('nombreCategoria')}"
+             th:errors="*{nombreCategoria}"></div>
+      </div>
+
+      <div class="campo">
+        <label for="descripcionCategoria">Descripcion Categoria</label>
+        <textarea id="descripcionCategoria" th:field="*{descripcionCategoria}" rows="5"></textarea>
+        <div class="error"
+             th:if="${#fields.hasErrors('descripcionCategoria')}"
+             th:errors="*{descripcionCategoria}"></div>
+      </div>
+
+      <div class="acciones">
+        <button type="submit"
+                class="btn btn-guardar"
+                th:text="${modoEdicion} ? 'Actualizar' : 'Guardar'"></button>
+
+        <a th:href="@{/categoria}" class="btn btn-volver">Volver</a>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
